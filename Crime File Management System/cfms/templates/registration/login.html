@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Crime File Management System</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href={% static 'assets/favicon.ico' %} />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href=" {% static '/css/styles.css' %} " rel="stylesheet" />
+        <link href=" {% static '/js/scripts.js' %} " rel="stylesheet" />
+    </head>
+{% block content %}
+
+<section>
+  <table class="table table-border">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-centered">
+        <h1 class="mt-5 mb-3 text-center">Login</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 offset-md-3 mt-3">
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            {{ form.username.label_tag }}
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              maxlength="150"
+              id="id_username"
+              required
+            />
+          </div>
+          <div class="form-group">
+            {{ form.password.label_tag }}
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="id_password"
+              required
+            />
+          </div>
+          {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+          <p style="font-size: 13px;">
+            {{ error|escape }}
+          </p>
+          {% endfor %} {% endif %}
+          <button type="submit" class="btn btn-primary my-4">Login</button>
+          <a href="{% url 'register' %}" class="btn btn-primary my-4">Sign Up</a>
+          <a href="{% url 'index' %}" class="btn btn-primary my-4">Home</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</table>
+</section>
+{% endblock %}
